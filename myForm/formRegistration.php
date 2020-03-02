@@ -33,7 +33,7 @@
 		</p>
 
 		<p>
-			<input type="submit" value="Регистрация">
+			<input type="submit" name="doReg" value="Регистрация">
 		</p>
 		
 		
@@ -56,28 +56,19 @@ function clean($value) {
 }
 
 
-$login = $_POST["name"];
-$password = $_POST["password"];
-$tel = $_POST["tel"];
-$email = $_POST["email"];
+
+if (!empty($_POST["doReg"])) {
 
 
 
-
-$login = clean($login); 
-$password = clean($password);
-$tel = clean($tel);
-$email = clean($email);
-
+foreach ($_POST as $key => $value) {
+	$newArr["$key"] = clean($value);
+	if (empty($newArr["$key"])) exit("Поле {$key} не заполнено");
+}
 
 
 
-
-if (empty($login)) exit();
-if (empty($login)) exit('Поле "Имя" не заполнено');
-if (empty($password)) exit('Поле "Пароль" не заполнено');
-if (empty($tel)) exit('Поле "Телефон" не заполнено');
-if (empty($email)) exit('Поле "Email" не заполнено');
+extract($newArr);
 
 if (!empty($email)) {
 	
@@ -126,7 +117,7 @@ foreach ($arrNames as $line) {
 	$temp[] = $data[0];
 }
 
-if(in_array($login, $temp)) {
+if(in_array($name, $temp)) {
 	exit("Данное имя уже зарегистрировано, пожалуйста, выберите другое");
 }
 
@@ -139,7 +130,7 @@ $fd = fopen($filename, "a");
 if(!$fd) {
 	exit("Ошибка при открытии файла данных");
 }	
-$str = $login."::".
+$str = $name."::".
        $password."::".
        $tel."::".
        $email.PHP_EOL;
@@ -154,6 +145,7 @@ echo "<HTML><HEAD>
 echo '<script type="text/javascript">
 window.location = "formLogin.php"
 </script>';
+}
 ?>
 </body>
 </html>
