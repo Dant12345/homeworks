@@ -1,0 +1,20 @@
+SELECT 	cst_id
+		,dcm_datetime
+	    ,contact_first_name
+        ,dcm_summ
+FROM customers as c
+	JOIN documents as d  ON c.cst_id = d.dcm_cst_id
+    /*WHERE dcm_summ >1000*/
+WHERE dcm_summ IS NULL;
+SELECT cst_id
+	   ,dcm_cst_id
+       ,ord_dcm_id
+       ,pst_ord_id
+	   ,contact_first_name
+       ,dcm_summ
+       ,ord_contact_person
+       ,pst_name
+FROM customers as c      
+	JOIN documents as d  ON c.cst_id = d.dcm_cst_id
+    JOIN orders as o ON d.dcm_id = o.ord_dcm_id
+    JOIN positions as p ON o.ord_id = p.pst_ord_id

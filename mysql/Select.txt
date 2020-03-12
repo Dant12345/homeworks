@@ -1,0 +1,30 @@
+/*
+первое и второе задание в селекте
+SELECT cst_id
+	  , cst_created
+      , cst_category_id
+      , COUNT(cst_id)
+FROM customers 
+WHERE cst_created >= '2020-00-00 00:00:00' AND cst_created < '2021-00-00 00:00:00' 
+	AND cst_category_id IS NOT NULL;)
+*/
+/*Третье задание
+*/
+
+SELECT 
+	dcm_id
+    ,dcm_cst_id
+    ,MAX(dcm_summ)
+FROM documents
+*/Четвертое задание*/
+SELECT dcm_id 
+
+	  ,dcm_cst_id
+      ,dcm_summ
+	   
+		
+FROM `documents` 
+WHERE dcm_summ > 1000
+
+
+

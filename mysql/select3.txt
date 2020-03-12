@@ -1,0 +1,24 @@
+SELECT  t1.cst_id
+	   ,t1.dcm_id
+       ,t1.contact_first_name
+       ,MAX(summ)
+       
+FROM (
+
+        SELECT c.cst_id
+                ,c.contact_first_name
+                ,d.dcm_id
+                ,d.dcm_cst_id
+				
+                ,COUNT(*) as ContactCount
+                ,SUM(d.dcm_summ) as summ
+                ,MAX(d.dcm_summ)
+        FROM customers AS c
+            JOIN documents AS d ON c.cst_id = d.dcm_cst_id
+        WHERE d.dcm_summ > 500a
+        GROUP BY c.contact_first_name
+        HAVING summ > 1000
+        ORDER BY summ DESC
+		LIMIT 5) AS t1
+        
+/*ѕолучаем клиента у которого сама€ больша€ сумма документов.»спользу€ подзапрос. ƒл€ начала создаем таблицу , где использу€ все разделы ищем с помощью агрегатной функцию сумму всех документов с услови€ми , группировкой по контактному имени , фильтрацией групп на сумму , и пор€дком вывода        */
