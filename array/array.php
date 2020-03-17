@@ -1,11 +1,6 @@
 <?php
+
 declare(strict_types=1);
-
-/**
- * @param array $array
- * @return array
- */
-
 
 $arr = [
     1,
@@ -22,26 +17,28 @@ $arr = [
         ],
     ],
 ];
+
 /**
-*Преобразуем многомерный массив в одномерный	
-*/
- function  makeOneArray($array) {
- 	if (!is_array($array)) 
- 	{
- 		return false;
- 	}
- 	$tmp = [];
- 	foreach ($array as $val) {
- 		if (is_array($val)) {
- 			$tmp = array_merge($tmp, makeOneArray($val));
- 			
- 		}
- 		
- 		else {
- 			$tmp[] = $val;
- 		}
- 	}
- 	return $tmp;
+ * Преобразуем многомерный массив в одномерный
+ *
+ * @param $array
+ * @return array
+ */
+function makeOneArray(array $array): array
+{
+    if (!is_array($array)) {
+        return [];
+    }
+
+    $tmp = [];
+    foreach ($array as $val) {
+        if (is_array($val)) {
+            $tmp = array_merge($tmp, makeOneArray($val));
+            continue;
+        }
+        $tmp[] = $val;
+    }
+    return $tmp;
 }
 
 
@@ -53,9 +50,7 @@ echo "<hr>";
 $maxElem = array_pop($newArr);
 echo "Максимальный элемент массива: " . $maxElem;
 
-
-
-$strArr= [
+$strArr = [
     'One',
     'Two',
     'Twenty',
@@ -64,20 +59,12 @@ $strArr= [
     'Aaaaaa - en',
 ];
 
-sort($strArr);
+sort($strArr, SORT_STRING);
 echo '<pre>';
 print_r($strArr);
 echo '</pre>';
-?>
 
-
-
-
-
-<?php
-
-
-$strArr= [
+$strArr = [
     'One',
     'Two',
     'Twenty',

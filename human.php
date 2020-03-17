@@ -1,114 +1,139 @@
 <?php
-abstract class Human {
 
-
+/**
+ * Class Human
+ */
+abstract class Human
+{
     public $growth;
     public $age;
-    public  $weight;
+    public $weight;
 
     private $temperament = "sanguine";
     private $abilities = "smarty";
 
-    public function __construct($aGrowth, $anAge, $aWeight)
+    /**
+     * Human constructor.
+     * @param int $aGrowth
+     * @param int $anAge
+     * @param float $aWeight
+     */
+    public function __construct(int $aGrowth, int $anAge, float $aWeight)
     {
         $this->growth = $aGrowth;
         $this->age = $anAge;
         $this->weight = $aWeight;
     }
 
-    public function say() {
-        echo "Привет чувааак, по темпераменту я -" .$this->temperament.", мой рост ".$this->growth."см, мой вес: ".
-            $this->weight. "кг, мой возраст: " .$this->age . "лет>";
+    public function say(): void
+    {
+        echo "Привет чувааак, по темпераменту я -" . $this->temperament . ", мой рост " . $this->growth . "см, мой вес: " .
+            $this->weight . "кг, мой возраст: " . $this->age . "лет>";
         $this->line();
-
-
     }
 
-    protected function think() {
+    protected function think(): void
+    {
         echo "Думаю, значит существую!Но это не точно!" . "<br>";
     }
 
-    protected function line() {
+    protected function line(): void
+    {
         echo "<hr>";
     }
 
 }
 
-class SmartyHuman extends Human {
-
+/**
+ * Class SmartyHuman
+ */
+class SmartyHuman extends Human
+{
     private $iq = 200;
 
-
-
-    public function say() {
-
-        echo  "Я умный человек мой IQ равен : " . $this->iq . "<br>";
+    public function say(): void
+    {
+        echo "Я умный человек мой IQ равен : " . $this->iq . "<br>";
         parent::say();
     }
-
-
 }
 
+/**
+ * Class SillyHuman
+ */
 abstract class SillyHuman extends Human
 {
-    public function think() {
+    public function think(): void
+    {
         echo "Я метод абстрактного класса меня смогут заюзать только потомки!!!<br>";
     }
-
-
 }
 
-class Noabstract extends SillyHuman {
-
-    public function say()
+/**
+ * Class Noabstract
+ */
+class Noabstract extends SillyHuman
+{
+    public function say(): void
     {
         $this->think();
         parent::line();
     }
 }
 
-class RapidMan extends Human {
-
-    public function editWeight() {
-
-
+/**
+ * Class RapidMan
+ */
+class RapidMan extends Human
+{
+    /**
+     * @return float
+     */
+    public function editWeight(): float
+    {
         $this->weight = $this->weight - 10;
         return $this->weight;
     }
 
-    public function say() {
-        echo "Я " . __CLASS__. " поэтому я вешу меньше, чем обычный человек, всего лишь :". $this->editWeight()." кг<br>" ;
+    public function say(): void
+    {
+        echo "Я " . __CLASS__ . " поэтому я вешу меньше, чем обычный человек, всего лишь :" . $this->editWeight(
+            ) . " кг<br>";
         parent::line();
     }
 }
 
-class SlowMan extends Human {
-
-    public function editWeight() {
-
-
+/**
+ * Class SlowMan
+ */
+class SlowMan extends Human
+{
+    /**
+     * @return float
+     */
+    public function editWeight(): float
+    {
         $this->weight = $this->weight + 50;
         return $this->weight;
     }
 
-    public function say() {
-        echo "Я " . __CLASS__. " поэтому я вешу больше, чем обычный человек, всего лишь :". $this->editWeight()." кг<br>" ;
+    public function say(): void
+    {
+        echo "Я " . __CLASS__ . " поэтому я вешу больше, чем обычный человек, всего лишь :" . $this->editWeight(
+            ) . " кг<br>";
         parent::line();
     }
 }
-
 
 
 $aSmartyHuman = new SmartyHuman(180, 20, 80);
 $aSmartyHuman->say();
 
-$noAbstract = new Noabstract(183,20, 90);
+$noAbstract = new Noabstract(183, 20, 90);
 $noAbstract->say();
 
-$rapidMan = new RapidMan(183,20, 90);
+$rapidMan = new RapidMan(183, 20, 90);
 $rapidMan->say();
 
-$slowMan = new SlowMan(183,20, 90);
+$slowMan = new SlowMan(183, 20, 90);
 $slowMan->say();
-
-?>
