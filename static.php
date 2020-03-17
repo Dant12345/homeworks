@@ -1,5 +1,6 @@
 <?php
-/*class ExampleStatic {
+/*
+class ExampleStatic {
 
     public static $my_static;
 
@@ -27,11 +28,10 @@ $sum->add(132,3);
  * Class Counter
  * Почему не срабатывает деструктор?!!!!
  */
-
-class Counter {
-
+class Counter
+{
     protected static $count = 0;
-     static public  $arr = [];
+    static public $arr = [];
 
     private function __construct()
     {
@@ -43,33 +43,39 @@ class Counter {
         self::$count--;
     }
 
-
-    public static function getCount() {
-            return self::$count;
+    /**
+     * @return int
+     */
+    public static function getCount(): int
+    {
+        return self::$count;
     }
 
-    public static function create($fname) {
+    /**
+     * @param string $fname
+     * @return static
+     */
+    public static function create(string $fname): self
+    {
         if (isset(self::$arr[$fname])) {
             return self::$arr[$fname];
-
-        }
-        else {
+        } else {
             return self::$arr[$fname] = new Counter;
-
         }
     }
 }
+
 $count = Counter::getCount();
-$a =Counter::create("file".Counter::getCount().".log");
-$b =Counter::create("file".Counter::getCount().".log");
-$c =Counter::create("file".Counter::getCount().".log");
+$a = Counter::create("file" . Counter::getCount() . ".log");
+$b = Counter::create("file" . Counter::getCount() . ".log");
+$c = Counter::create("file" . Counter::getCount() . ".log");
 echo "<pre>";
 var_dump(Counter::$arr);
 echo "</pre>";
 Counter::getCount();
-$a1 =Counter::create("file".Counter::getCount().".log");
-$b2 =Counter::create("file".Counter::getCount().".log");
-$c3 =Counter::create("file".Counter::getCount().".log");
+$a1 = Counter::create("file" . Counter::getCount() . ".log");
+$b2 = Counter::create("file" . Counter::getCount() . ".log");
+$c3 = Counter::create("file" . Counter::getCount() . ".log");
 echo "<pre>";
 var_dump(Counter::$arr);
 echo "</pre>";
@@ -79,4 +85,3 @@ echo "<pre>";
 var_dump(Counter::$arr);
 echo "</pre>";
 echo Counter::getCount();
-?>

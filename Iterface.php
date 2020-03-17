@@ -1,156 +1,193 @@
 <?php
+
+/**
+ * Class Vehicle
+ */
 class Vehicle
 {
-   public $wheel = 4;
-
-
+    public $wheel = 4;
 }
 
+/**
+ * Interface Driver
+ */
+interface Driver
+{
+    public function drive(): void;
 
-interface Driver {
-
-    public function drive();
-    public function fix(Vehicle $vehicle);
+    public function fix(Vehicle $vehicle): void;
 }
 
-interface Pilot{
+/**
+ * Interface Pilot
+ */
+interface Pilot
+{
+    public function fly(): void;
 
-    public function fly();
-    public function company();
-
+    public function company(): void;
 }
 
-interface CaptainOfTheShip {
+/**
+ * Interface CaptainOfTheShip
+ */
+interface CaptainOfTheShip
+{
+    public function drive(): void;
 
-    public function drive();
-    public function aqua();
-
+    public function aqua(): void;
 }
 
-
-abstract class DriverShip implements CaptainOfTheShip {
-
+/**
+ * Class DriverShip
+ */
+abstract class DriverShip implements CaptainOfTheShip
+{
+    /**
+     * @var string
+     */
     protected $ship;
 
+    abstract public function aqua(): void;
 
-    public function drive() {
-        echo "Я хожу по воде на своем любимом ".$this->ship . "<br>";
+    public function drive(): void
+    {
+        echo "Я хожу по воде на своем любимом " . $this->ship . "<br>";
     }
-
-    abstract public function aqua();
-
 
 }
 
-class Lainer extends DriverShip {
-
+/**
+ * Class Lainer
+ */
+class Lainer extends DriverShip
+{
     public $ship = "Лайнер";
 
-    public function drive()
+    public function drive(): void
     {
         parent::drive();
         $this->aqua();
     }
 
-    public function aqua() {
-     echo "Не страшны мне шторма!". "<br>";
+    public function aqua(): void
+    {
+        echo "Не страшны мне шторма!" . "<br>";
     }
 }
 
-abstract class Pilots implements Pilot {
-
+/**
+ * Class Pilots
+ */
+abstract class Pilots implements Pilot
+{
     protected $height;
 
-    public function fly() {
-       echo "Полет нормальный максимальная высота " .$this->height. " метров!";
-    }
-    abstract public function company();
+    abstract public function company(): void;
 
+    public function fly(): void
+    {
+        echo "Полет нормальный максимальная высота " . $this->height . " метров!";
+    }
 }
 
-class PilotPas extends Pilots {
-
+/**
+ * Class PilotPas
+ */
+class PilotPas extends Pilots
+{
     protected $height = 10000;
 
-
-
-
-    public function company() {
+    public function company(): void
+    {
         echo "Скажи по секрету компания наша ПОБЕДА!";
     }
 }
 
-
-abstract class DriverPublicVehicle implements Driver {
-
+/**
+ * Class DriverPublicVehicle
+ */
+abstract class DriverPublicVehicle implements Driver
+{
     protected $maxPeople;
 
-    public function drive()
+    abstract public function sendToRepairStation();
+
+    abstract protected function angryDriver();
+
+    public function drive(): void
     {
         echo "Я везу максимум " . $this->maxPeople . " человек<br>";
     }
-    public function fix(Vehicle $vehicle)
+
+    public function fix(Vehicle $vehicle): void
     {
         $this->sendToRepairStation($vehicle);
     }
-
-    abstract public  function sendToRepairStation();
-
-    abstract protected function angryDriver();
 }
 
-
-class DriverBus extends DriverPublicVehicle {
-
+/**
+ * Class DriverBus
+ */
+class DriverBus extends DriverPublicVehicle
+{
     private $name = "Я водитель автобуса";
     protected $maxPeople = 50;
 
-    public function drive()
-    {  parent::drive();
-       echo "Еду только по маршруту!!";
+    public function drive(): void
+    {
+        parent::drive();
+        echo "Еду только по маршруту!!";
     }
-    public function fix(Vehicle $vehicle)
+
+    public function fix(Vehicle $vehicle): void
     {
         $this->sendToRepairStation($vehicle);
     }
 
-    public function sendToRepairStation() {
-        echo "Отправлю машинку на ремонт в сервис!". "<br>";
+    public function sendToRepairStation(): void
+    {
+        echo "Отправлю машинку на ремонт в сервис!" . "<br>";
     }
 
-    public function talk() {
+    public function talk(): void
+    {
         $this->angryDriver();
     }
 
-    protected function angryDriver()
+    protected function angryDriver(): void
     {
-        echo "Не сметь разговарить с водителем!".$this->name. "<br>";
+        echo "Не сметь разговарить с водителем!" . $this->name . "<br>";
     }
 }
 
-
-class DriverTrollbus extends DriverPublicVehicle {
-
+/**
+ * Class DriverTrollbus
+ */
+class DriverTrollbus extends DriverPublicVehicle
+{
     private $name = "Я водитель лимузина, ну почти";
     protected $maxPeople = 60;
 
-    public function drive()
-    {   parent::drive();
+    public function drive(): void
+    {
+        parent::drive();
         echo "Еду только по маршруту!!";
-
     }
-    public function fix(Vehicle $vehicle)
+
+    public function fix(Vehicle $vehicle): void
     {
         $this->sendToRepairStation($vehicle);
     }
 
-    public function sendToRepairStation() {
+    public function sendToRepairStation(): void
+    {
         echo "Отправлю машинку на ремонт в сервис!";
     }
 
-    protected function angryDriver()
+    protected function angryDriver(): void
     {
-        echo "Не сметь разговарить с водителем!".$this->name;
+        echo "Не сметь разговарить с водителем!" . $this->name;
     }
 }
 
@@ -164,4 +201,3 @@ $obj1->drive();
 
 $obj3 = new PilotPas();
 $obj3->fly();
-?>

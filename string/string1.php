@@ -1,16 +1,15 @@
-<?php 
+<?php
 
-/*$array = [a, 123 , asdsa , b , sda , d];
-
+/*
+$array = [a, 123 , asdsa , b , sda , d];
 sort($array);
-
-print_r($array);*/
+print_r($array);
+*/
 
 /**
-*Challenge2
-*/
+ * Challenge2
+ */
 $str = 'AAbBbbCcCcAAa';
-
 
 $arr = str_split($str);
 $prevSym = false;
@@ -22,13 +21,13 @@ foreach ($arr as $index => $sym) {
     $prevSym = $sym;
 }
 
-echo implode('', $arr) .PHP_EOL;
+echo implode('', $arr) . PHP_EOL;
 
 print_r($arr);
 
 /**
-*Challenge3
-*/
+ * Challenge3
+ */
 
 
 $arr = str_split($str);
@@ -41,6 +40,6 @@ foreach ($arr as $index => $sym) {
     $prevSym = $sym;
 }
 
-echo implode('', $arr) .PHP_EOL;
+echo implode('', $arr) . PHP_EOL;
 
 print_r($arr);

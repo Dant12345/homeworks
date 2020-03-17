@@ -3,6 +3,7 @@
 /**
  * Task1
  */
+
 /*class ExampleStatic {
 
     public static $my_static;
@@ -67,48 +68,41 @@ echo Counter::getCount();*/
 /**
  * Task4
  */
-
-class A {
-
-
-
-   protected static function title() {
-       echo __CLASS__;
+class A
+{
+    protected static function title(): void
+    {
+        echo __CLASS__;
     }
-
-
 }
 
-class Child extends A {
-
-    protected static function title() {
+class Child extends A
+{
+    protected static function title(): void
+    {
         echo __CLASS__;
     }
 
-    public static function myTest() {
+    public static function myTest(): void
+    {
         self::title();
     }
 
-    public static function myTest1() {
-       A::title();
+    public static function myTest1(): void
+    {
+        A::title();
     }
-
-
-
-
 }
 
 echo Child::mytest();
 echo "<hr>";
 echo Child::myTest1();
 
-?>
-
 /**
-*Task 5 
+*Task 5
 *Абстрактный класс нужен, когда нужно описать множество классов у которых много общего .(В своем роде шаблон, описывающий общую сущность)
 *Интерфейс же описывает свойства, поведение (совокупность правил взаимодействия отдельных вещей..систем)
 */
 /**
-*	
+*
 */
